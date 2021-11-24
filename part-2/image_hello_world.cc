@@ -4,7 +4,7 @@
 // vroque19@csu.fullerton.edu
 // @vroque19
 //
-// Lab 11-01
+// Lab 11-02
 //
 // This creates an image
 //
