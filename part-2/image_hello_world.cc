@@ -6,6 +6,8 @@
 //
 // Lab 11-01
 //
+// This creates an image
+//
 #include <Magick++.h>
 
 #include <cmath>
