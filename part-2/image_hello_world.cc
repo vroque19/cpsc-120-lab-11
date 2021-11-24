@@ -1,4 +1,11 @@
-
+// Vanessa Roque
+// CPSC 120-19
+// 2021-11-18
+// vroque19@csu.fullerton.edu
+// @vroque19
+//
+// Lab 11-01
+//
 #include <Magick++.h>
 
 #include <cmath>
@@ -39,6 +46,9 @@ int main(int argc, char const *argv[]) {
   // Remember `make test` will only work with 512 x 512
   const int kImageWidth = 512;
   const int kImageHeight = 512;
+ 
+
+  
 
   ColorRGB white(1, 1, 1);
   Image image(Geometry(kImageWidth, kImageHeight), white);
@@ -46,14 +56,31 @@ int main(int argc, char const *argv[]) {
   // Keep column as an int because we're counting down and only stop after
   // columns < 0
   for (int column = int(image.columns() - 1); column >= 0; column--) {
+
+
+
     for (unsigned int row = 0; row < image.rows(); row++) {
-      // TODO: Declare a double variable named red
-      // TODO: Declare a double variable named green
-      // TODO: Declare a double variable named blue; initialize blue to 0.25
-      // TODO: Convert row to a double using double() and convert (kImageWidth -1) to a double using double() then calculate the ratio of row:(kImageWidth -1). Assign this ratio to red.
-      // TODO: Convert column to a double using double() and convert (kImageHeight -1) to a double using double() then calculate the ratio of row:(kImageWidth -1). Assign this ratio to green.
-      // TODO: Declare a new GraphicsMagick color variable. Set the color to the color defined by the variables red, green, blue declared above.
-      // TODO: Using the variable image and the member function pixelColor(), set the pixel at row, column to color.
+      double red;
+      double green;
+      double blue = 0.25;
+
+      row = (double)row;
+      double kDIW = double(kImageWidth - 1);
+      red = (double)row / (double)(kImageWidth - 1);
+      //  Declare a double variable named red
+      //  Declare a double variable named green
+      //  Declare a double variable named blue; initialize blue to 0.25
+      //  Convert row to a double using double() 
+      //and convert (kImageWidth -1) to a double using double() 
+      // then calculate the ratio of row:(kImageWidth -1). 
+      // Assign this ratio to red.
+      green = (double)column / (double)(kImageHeight -1);
+      ColorRGB color(red, green, blue);
+      image.pixelColor(row, column, color);
+
+      // Convert column to a double using double() and convert (kImageHeight -1) to a double using double() then calculate the ratio of row:(kImageWidth -1). Assign this ratio to green.
+      // Declare a new GraphicsMagick color variable. Set the color to the color defined by the variables red, green, blue declared above.
+      // Using the variable image and the member function pixelColor(), set the pixel at row, column to color.
     }
   }
 

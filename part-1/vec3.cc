@@ -1,27 +1,48 @@
-
+// Vanessa Roque
+// CPSC 120-19
+// 2021-11-18
+// vroque19@csu.fullerton.edu
+// @vroque19
+//
+// Lab 11-01
+//
 #include "vec3.h"
 
 // See the header file for documentation.
 
 double Vec3::x() const {
-  // TODO: return x_
+  return x_;
+  // return x_
 }
 
 double Vec3::y() const {
-  // TODO: return y_
+  return y_;
+  // return y_
 }
 double Vec3::z() const {
-  // TODO: return z_
+  return z_;
+  // return z_
 }
 
 Vec3 Vec3::operator-() const {
-  // TODO: return a new vector which has the same components but they
+  return Vec3(-x_, -y_, -z_);
+  // return a new vector which has the same components but they
   // have been negated. For example, if you have a variable p then to
   // negate it is -p.
 }
 
 double Vec3::operator[](int i) const noexcept(false) {
-  // TODO: The implementation is the same body as
+  if (i == 0) {
+    return x_;
+  } else if (i == 1) {
+    return y_;
+  } else if (i == 2) {
+    return z_;
+  } else {
+    throw std::out_of_range("Index out of range. Must be between 0 and 2.");
+  }
+
+  // The implementation is the same body as
   // double& Vec3::operator[](int i) noexcept(false).
 }
 
@@ -51,37 +72,48 @@ int Vec3::size() const { return kSize_; }
 double Vec3::length() const { return std::sqrt(length_squared()); }
 
 double Vec3::length_squared() const {
-  // TODO: return the sum of the square of the 
+  double d = x_ * x_ + y_ * y_ + z_ * z_;
+  // return the sum of the square of the 
   // components. That means x_ * x_ + y_ * y_ + z_ * z_.
+  return length_squared();
 }
 
 std::ostream& operator<<(std::ostream& out, const Vec3& v) {
-  // TODO: send to out something that will look like "(1.2, 3.4, 5.6)".
+  out << v.x();
+  out << v.y();
+  out << v.z();
+  return out;
+  // send to out something that will look like "(1.2, 3.4, 5.6)".
   // Remember that this is a function and not a member function so you 
   // can only see/use things that are publich. Hint: you can't use x_, y_,
   // or z_. You can use v.x(), v.y(), or v.z(). Don't forget the return.
 }
 
 Vec3 operator+(const Vec3& lhs, const Vec3& rhs) {
-  // TODO: Return a new Vec3 with the sum of the components.
+
+  return Vec3(lhs.x() + rhs.x(), lhs.y() + rhs.y(), lhs.z() + rhs.z());
+  // Return a new Vec3 with the sum of the components.
   // lhs means "left hand side" and rhs means "right hand side".
   // lhs + rhs means Vec3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z)
 }
 
 Vec3 operator-(const Vec3& lhs, const Vec3& rhs) {
-  // TODO: Return a new Vec3 with the difference of the components.
+  return Vec3(lhs.x() - rhs.x(), lhs.y() - rhs.y(), lhs.z() - rhs.z());
+  // Return a new Vec3 with the difference of the components.
   // lhs means "left hand side" and rhs means "right hand side".
   // lhs - rhs means Vec3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z)
 }
 
 Vec3 operator*(double lhs, const Vec3& rhs) {
-  // TODO: Return a new Vec3 with the components scaled by lhs.
+  return Vec3(lhs * rhs.x(), lhs * rhs.y(), lhs * rhs.z());
+  // Return a new Vec3 with the components scaled by lhs.
   // lhs means "left hand side" and rhs means "right hand side".
   // lhs * rhs means Vec3(lhs * rhs.x, lhs * rhs.y, lhs * rhs.z)
 }
 
 Vec3 operator*(const Vec3& lhs, double rhs) {
-  // TODO: Return a new Vec3 with the components scaled by lhs.
+  return Vec3(rhs * lhs.x(), rhs * lhs.y(), rhs * lhs.z());
+  // Return a new Vec3 with the components scaled by lhs.
   // lhs means "left hand side" and rhs means "right hand side".
   // Hint: Reuse Vec3 operator*(double lhs, const Vec3& rhs) by 
   // swapping the order of lhs and rhs.
@@ -112,7 +144,9 @@ bool operator==(const Vec3& lhs, const Vec3& rhs) {
 bool operator!=(const Vec3& lhs, const Vec3& rhs) { return not(lhs == rhs); }
 
 double Dot(const Vec3& u, const Vec3& v) {
-  // TODO: Calculate the dot product between u and v.
+  double dot = u.x() * v.x() + u.y() + v.y() * u.z() * v.z();
+  return dot;
+  // Calculate the dot product between u and v.
   // See https://en.wikipedia.org/wiki/Dot_product
   // This function returns a double.
   // u.x * v.x + u.y + v.y * u.z * v.z
